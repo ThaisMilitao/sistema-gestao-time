@@ -59,7 +59,7 @@ function AddMemberModal({ onSave, onClose }: { onSave: (data: any) => Promise<vo
               onChange={(e) => setName(e.target.value)}
               placeholder="Nome completo"
               autoFocus
-              className="w-full text-sm border border-slate-200 rounded-lg px-3 py-2.5 focus:outline-none focus:ring-2 focus:ring-violet-500"
+              className="w-full text-sm bg-white text-slate-900 border border-slate-200 rounded-lg px-3 py-2.5 focus:outline-none focus:ring-2 focus:ring-violet-500"
             />
           </div>
           <div>
@@ -69,7 +69,7 @@ function AddMemberModal({ onSave, onClose }: { onSave: (data: any) => Promise<vo
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               placeholder="email@empresa.com"
-              className="w-full text-sm border border-slate-200 rounded-lg px-3 py-2.5 focus:outline-none focus:ring-2 focus:ring-violet-500"
+              className="w-full text-sm bg-white text-slate-900 border border-slate-200 rounded-lg px-3 py-2.5 focus:outline-none focus:ring-2 focus:ring-violet-500"
             />
           </div>
           <div>
@@ -79,7 +79,7 @@ function AddMemberModal({ onSave, onClose }: { onSave: (data: any) => Promise<vo
               value={role}
               onChange={(e) => setRole(e.target.value)}
               placeholder="Ex: Designer, Desenvolvedor..."
-              className="w-full text-sm border border-slate-200 rounded-lg px-3 py-2.5 focus:outline-none focus:ring-2 focus:ring-violet-500"
+              className="w-full text-sm bg-white text-slate-900 border border-slate-200 rounded-lg px-3 py-2.5 focus:outline-none focus:ring-2 focus:ring-violet-500"
             />
           </div>
         </div>

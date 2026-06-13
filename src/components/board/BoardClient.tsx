@@ -56,8 +56,12 @@ function TaskCard({
     <div
       onClick={onClick}
       className={cn(
-        "bg-white rounded-lg border p-3 cursor-pointer hover:shadow-md transition-all group",
-        overdue ? "border-red-200" : dueSoon ? "border-amber-200" : "border-slate-200 hover:border-slate-300"
+        "rounded-lg border p-3 cursor-pointer hover:shadow-md transition-all group",
+        overdue 
+          ? "bg-red-50 border-red-200 text-red-900" 
+          : dueSoon 
+          ? "bg-amber-50 border-amber-200 text-amber-900" 
+          : "bg-white border-slate-200 hover:border-slate-300"
       )}
     >
       {/* Priority badge */}
