@@ -1,3 +1,5 @@
+import { BoardClient } from "@/components/board/BoardClient";
+
 export const dynamic = "force-dynamic";
 
 async function getData() {
@@ -8,4 +10,9 @@ async function getData() {
   ]);
   const [tasks, members] = await Promise.all([tasksRes.json(), membersRes.json()]);
   return { tasks, members };
+}
+
+export default async function BoardPage() {
+  const { tasks, members } = await getData();
+  return <BoardClient initialTasks={tasks} members={members} />;
 }

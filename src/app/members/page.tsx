@@ -1,3 +1,5 @@
+import { MembersClient } from "@/components/dashboard/MembersClient";
+
 export const dynamic = "force-dynamic";
 
 async function getMembers() {
@@ -5,4 +7,9 @@ async function getMembers() {
   const res = await fetch(`${baseUrl}/api/members`, { cache: "no-store" });
   if (!res.ok) throw new Error("Failed to fetch members");
   return res.json();
+}
+
+export default async function MembersPage() {
+  const members = await getMembers();
+  return <MembersClient initialMembers={members} />;
 }

@@ -22,7 +22,12 @@ services:
     ports:
       - "3000:3000"
     environment:
-      NEXT_PUBLIC_BASE_URL: http://localhost:3000
+      - NEXT_PUBLIC_BASE_URL=http://localhost:3000
+      - DATABASE_URL=postgresql://postgres:postgres@db:5432/gestao-time?schema=public
+    
+    depends_on:
+      db:
+        condition: service_healthy
 
 volumes:
   postgres_data:

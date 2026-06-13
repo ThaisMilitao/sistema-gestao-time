@@ -6,14 +6,13 @@ const globalForPrisma = globalThis as unknown as {
   prisma: PrismaClient | undefined;
 };
 
-// Configura o pool de conexões usando a sua variável de ambiente
 const pool = new Pool({ connectionString: process.env.DATABASE_URL });
 const adapter = new PrismaPg(pool);
 
 export const prisma =
   globalForPrisma.prisma ??
   new PrismaClient({
-    adapter, //  Passando o adaptador nativo exigido pelo Prisma 7
+    adapter, 
     log: process.env.NODE_ENV === "development" ? ["error", "warn"] : ["error"],
   });
 
