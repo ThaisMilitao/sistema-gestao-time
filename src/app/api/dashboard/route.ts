@@ -17,24 +17,28 @@ export async function GET() {
       prisma.member.findMany({ orderBy: { name: "asc" } }),
     ]);
 
-    // --- KPI 1: Taxa de conclusão no prazo ---
-    // Tasks concluídas: quantas foram entregues antes ou na data de vencimento?
-    const doneTasks = allTasks.filter((t) => t.status === "DONE" && t.dueDate && t.completedAt);
-    const onTimeTasks = doneTasks.filter(
-      (t) => t.completedAt! <= t.dueDate!
+    // --- KPI 1: Índice de Pontualidade Atual (SLA) ---
+    // Avalia o que já foi concluído + o que está atrasado sem ter sido entregue
+    const tasksWithDuePassedOrDone = allTasks.filter((t) => 
+      (t.status === "DONE" && t.dueDate && t.completedAt) || 
+      (t.status !== "DONE" && t.dueDate && t.dueDate < now)
     );
-    const onTimeRate =
-      doneTasks.length > 0
-        ? Math.round((onTimeTasks.length / doneTasks.length) * 100)
+
+    const onTimeDoneTasks = tasksWithDuePassedOrDone.filter(
+      (t) => t.status === "DONE" && t.completedAt! <= t.dueDate!
+    );
+
+    const projectSlaRate =
+      tasksWithDuePassedOrDone.length > 0
+        ? Math.round((onTimeDoneTasks.length / tasksWithDuePassedOrDone.length) * 100)
         : 0;
 
     // --- KPI 2: Tarefas atrasadas agora ---
     const overdueTasks = allTasks.filter(
       (t) => t.status !== "DONE" && t.dueDate && t.dueDate < now
     );
-    const overdueUrgent = overdueTasks
-      .filter((t) => t.priority === "URGENT" || t.priority === "HIGH")
-      .slice(0, 5);
+    
+    const overdueUrgent = overdueTasks.slice(0, 10);
 
     // --- KPI 3: Velocidade semanal ---
     const weeklyDone = allTasks.filter(
@@ -82,10 +86,10 @@ export async function GET() {
           t.dueDate >= now &&
           t.dueDate <= in48h
       )
-      .slice(0, 6);
+      .slice(0, 10);
 
     const kpis: DashboardKPIs = {
-      onTimeRate,
+      onTimeRate: projectSlaRate, 
       overdueCount: overdueTasks.length,
       overdueUrgent: overdueUrgent.map((t) => ({
         ...t,

@@ -88,7 +88,7 @@ export function DashboardClient({ kpis }: DashboardClientProps) {
         <KPICard
           title="No prazo"
           value={`${kpis.onTimeRate}%`}
-          subtitle="tarefas concluídas dentro do prazo"
+          subtitle="Taxa de Sucesso de Entregas"
           icon={CheckCircle2}
           color="bg-emerald-500"
         />
@@ -146,20 +146,21 @@ export function DashboardClient({ kpis }: DashboardClientProps) {
                   borderRadius: 8,
                   border: "1px solid #e2e8f0",
                   boxShadow: "0 4px 6px -1px rgb(0 0 0 / 0.1)",
+                  color: "#0f172a"
                 }}
                 labelFormatter={(label, payload) => {
                   const item = payload?.[0]?.payload;
                   return item?.fullName ?? label;
                 }}
               />
-              <Bar dataKey="A fazer" stackId="a" fill="#e2e8f0" radius={[0, 0, 0, 0]} />
+              <Bar dataKey="A fazer" stackId="a" fill="#a9b5c4" radius={[0, 0, 0, 0]} />
               <Bar dataKey="Em andamento" stackId="a" fill="#818cf8" radius={[0, 0, 0, 0]} />
               <Bar dataKey="Bloqueado" stackId="a" fill="#f87171" radius={[4, 4, 0, 0]} />
             </BarChart>
           </ResponsiveContainer>
           <div className="flex items-center gap-4 mt-3 justify-center">
             {[
-              { label: "A fazer", color: "bg-slate-200" },
+              { label: "A fazer", color: "bg-slate-400" },
               { label: "Em andamento", color: "bg-indigo-400" },
               { label: "Bloqueado", color: "bg-red-400" },
             ].map((l) => (
