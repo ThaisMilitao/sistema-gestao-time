@@ -19,10 +19,10 @@ export function Sidebar() {
       <div className="px-5 py-5 border-b border-slate-700/50">
         <div className="flex items-center gap-2">
           <div className="w-7 h-7 rounded-md bg-violet-500 flex items-center justify-center">
-            <span className="text-white font-bold text-xs">RT</span>
+            <span className="text-white font-bold text-xs">ET</span>
           </div>
           <div>
-            <p className="text-sm font-semibold text-white leading-tight">Ricardo Tech</p>
+            <p className="text-sm font-semibold text-white leading-tight">Empresa Tech</p>
             <p className="text-[10px] text-slate-400 leading-tight">Gestão do Time</p>
           </div>
         </div>
