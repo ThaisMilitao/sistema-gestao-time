@@ -6,6 +6,7 @@ import { LayoutDashboard, Kanban, Users, ChevronRight } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 const NAV_ITEMS = [
+  { href: "/dashboard", label: "Painel", icon: LayoutDashboard },
   { href: "/board", label: "Quadro", icon: Kanban },
   { href: "/members", label: "Time", icon: Users },
 ];
