@@ -17,7 +17,19 @@ export async function GET(request: NextRequest) {
       orderBy: [{ priority: "desc" }, { dueDate: "asc" }, { createdAt: "desc" }],
     });
 
-    return NextResponse.json(tasks);
+    const now = new Date();
+
+    const sortedTasks = tasks.sort((a, b) => {
+      const aOverdue = a.dueDate && new Date(a.dueDate) < now && a.status !== "DONE"; // Adapte o "DONE" se necessário
+      const bOverdue = b.dueDate && new Date(b.dueDate) < now && b.status !== "DONE";
+
+      if (aOverdue && !bOverdue) return -1;
+      if (!aOverdue && bOverdue) return 1;
+
+      return 0;
+    });
+
+    return NextResponse.json(sortedTasks);
   } catch (error) {
     console.error("GET /api/tasks error:", error);
     return NextResponse.json({ error: "Erro ao buscar tarefas" }, { status: 500 });
